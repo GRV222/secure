@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Child Safety Standards — SECURE</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --gold: #C9922A;
+    --gold-light: #E8B84B;
+    --dark: #080604;
+    --dark2: #0F0A05;
+    --text: #F0EAE0;
+    --text-sub: #9A8E7E;
+    --border: rgba(201,146,42,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Subtle background glow */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(201,146,42,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .header p {
+    font-size: 14px;
+    color: var(--text-sub);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(201,146,42,0.1);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 11px;
+    color: var(--gold-light);
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .badge::before {
+    content: '🛡';
+    font-size: 12px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 44px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 22px;
+    background: var(--gold);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  p {
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 14px;
+    opacity: 0.88;
+  }
+
+  /* Policy card */
+  .policy-card {
+    background: rgba(201,146,42,0.05);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+
+  .policy-card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  .policy-card p {
+    font-size: 14px;
+    margin-bottom: 0;
+    opacity: 0.8;
+  }
+
+  /* List */
+  ul {
+    list-style: none;
+    margin: 12px 0 16px;
+  }
+
+  ul li {
+    font-size: 14px;
+    color: var(--text);
+    opacity: 0.85;
+    padding: 7px 0 7px 22px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  ul li:last-child { border-bottom: none; }
+
+  ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 700;
+    top: 8px;
+  }
+
+  /* Contact box */
+  .contact-box {
+    background: rgba(201,146,42,0.08);
+    border: 1px solid rgba(201,146,42,0.3);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-top: 40px;
+  }
+
+  .contact-box h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .contact-row:last-child { margin-bottom: 0; }
+
+  .contact-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 80px;
+    padding-top: 2px;
+  }
+
+  .contact-value {
+    font-size: 14px;
+    color: var(--text);
+    opacity: 0.85;
+  }
+
+  .contact-value a {
+    color: var(--gold-light);
+    text-decoration: none;
+  }
+
+  .contact-value a:hover {
+    text-decoration: underline;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer p {
+    font-size: 12px;
+    color: var(--text-sub);
+    opacity: 0.6;
+    margin-bottom: 6px;
+  }
+
+  .footer .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    font-weight: 600;
+  }
+
+  .effective-date {
+    font-size: 12px;
+    color: var(--text-sub);
+    text-align: right;
+    margin-bottom: 32px;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <span class="logo">SECURE</span>
+    <div class="badge">Child Safety Standards</div>
+    <h1>Our Commitment to Child Safety</h1>
+    <p>Standards against Child Sexual Abuse and Exploitation (CSAE) — published in compliance with Google Play policy.</p>
+  </div>
+
+  <div class="effective-date">Effective: June 1, 2026 · Last updated: June 1, 2026</div>
+
+  <div class="section">
+    <div class="section-title">Our Zero-Tolerance Policy</div>
+    <p>SECURE maintains a strict zero-tolerance policy against child sexual abuse and exploitation (CSAE) in any form. This applies to all content, interactions, and user behaviour on our platform.</p>
+    <p>The safety and protection of minors is our highest priority. No exceptions.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Prohibited Content and Behaviour</div>
+    <p>The following are strictly prohibited on SECURE and will result in immediate account termination and reporting to relevant authorities:</p>
+    <ul>
+      <li>Any content that sexually exploits, abuses, or endangers minors</li>
+      <li>Child Sexual Abuse Material (CSAM) in any format — images, video, audio, or text</li>
+      <li>Grooming behaviour — adults attempting to establish inappropriate relationships with minors</li>
+      <li>Solicitation of minors for sexual purposes</li>
+      <li>Sharing, distributing, or requesting CSAE material</li>
+      <li>Content that sexualises minors in any way</li>
+      <li>Using the platform to facilitate contact with minors for exploitative purposes</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Identity Verification</div>
+    <div class="policy-card">
+      <h3>Real People Only</h3>
+      <p>Every SECURE account requires a private selfie during registration. This is stored securely and never displayed publicly. It confirms that a real adult human is behind each account, reducing the risk of fake or exploitative profiles targeting minors.</p>
+    </div>
+    <div class="policy-card">
+      <h3>Age Requirements</h3>
+      <p>SECURE is intended for users aged 13 and over. Users under 13 are not permitted to create accounts. We encourage parents and guardians to monitor their children's app usage.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Detection and Enforcement</div>
+    <p>SECURE employs the following measures to detect and prevent CSAE:</p>
+    <ul>
+      <li>Manual review of reported content within 24 hours</li>
+      <li>User reporting tools available on every post and profile</li>
+      <li>Immediate content removal upon confirmed violation</li>
+      <li>Permanent account ban for any CSAE-related violation</li>
+      <li>Cooperation with law enforcement and relevant authorities</li>
+      <li>Reporting confirmed CSAM to the National Center for Missing and Exploited Children (NCMEC) and local Indian authorities</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Reporting Mechanisms</div>
+    <p>Users can report any content or behaviour they believe violates these standards through multiple channels:</p>
+    <ul>
+      <li>In-app report button on every post, comment, and profile</li>
+      <li>Direct email to our safety team (see contact below)</li>
+      <li>All reports are reviewed within 24 hours</li>
+      <li>Reporters remain anonymous</li>
+      <li>No retaliation against reporters</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Content Moderation</div>
+    <div class="policy-card">
+      <h3>Community Standards</h3>
+      <p>All user-generated content on SECURE — including posts, discussions, and profile information — must comply with our Community Standards. Content that violates child safety policies is removed immediately upon detection or report.</p>
+    </div>
+    <div class="policy-card">
+      <h3>Discussions (Messaging)</h3>
+      <p>Our Discussions feature is monitored for inappropriate contact. Users can block and report any other user at any time. Unsolicited contact with minors is treated as a serious violation.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="contact-box">
+    <h2>Safety Contact Information</h2>
+    <p style="font-size:14px; margin-bottom:20px; opacity:0.75;">
+      To report child safety concerns, violations, or CSAE content, contact us immediately through any of the following:
+    </p>
+
+    <div class="contact-row">
+      <span class="contact-label">Email</span>
+      <span class="contact-value">
+        <a href="mailto:secure@bathiyagroup.com">secure@bathiyagroup.com</a><br>
+        Subject line: <em>CHILD SAFETY REPORT</em>
+      </span>
+    </div>
+
+    <div class="contact-row">
+      <span class="contact-label">Response</span>
+      <span class="contact-value">Within 24 hours for all safety reports</span>
+    </div>
+
+    <div class="contact-row">
+      <span class="contact-label">Developer</span>
+      <span class="contact-value">Bathiya Group, Porbandar, Gujarat, India</span>
+    </div>
+
+    <div class="contact-row">
+      <span class="contact-label">App</span>
+      <span class="contact-value">SECURE — com.secure.secure</span>
+    </div>
+
+    <div class="contact-row">
+      <span class="contact-label">NCMEC</span>
+      <span class="contact-value">
+        <a href="https://www.missingkids.org/gethelpnow/cybertipline" target="_blank">CyberTipline — Report CSAM</a>
+      </span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="footer">
+    <p>This policy is reviewed and updated regularly.</p>
+    <p>SECURE complies with Google Play's child safety standards policy and all applicable laws.</p>
+    <br>
+    <div class="brand">SECURE</div>
+    <br>
+    <p>Be Seen. Be Real. Be SECURE.</p>
+  </div>
+
+</div>
+</body>
+</html>
